@@ -29,26 +29,34 @@ class Cell:
 def ll_new(initial_l: list[int] | None = None) -> LinkedList:
     #raise NotImplementedError("LinkedList ll_new function not yet implemented")
     
-    s : Cell = Cell(0,None,None) #sentinelle servant 
+    #s : Cell = Cell(0,None,None) #sentinelle servant 
 
     new : LinkedList = LinkedList(
 
         sentinelle= Cell(
-            item=s.item,
-            pred=s.pred,
-            suiv=s.suiv,
+            item=0,
+            pred=None,
+            suiv=None,
         ),
 
-        size=-1,
+        size=0,
 
     )
+
+    if initial_l !=None:
+
+        for i in range(len(initial_l)):
+            
+            ll_append(new,initial_l[i])
+            
+            
     
     return new
 
 
 def ll_is_empty(l: LinkedList) -> bool:
     #raise NotImplementedError("LinkedList ll_is_empty function not yet implemented")
-    return l.sentinelle.suiv==None and l.sentinelle.pred==None and l.size==-1
+    return l.sentinelle.suiv==None and l.sentinelle.pred==None and l.size==0
 
 
 
@@ -84,6 +92,9 @@ def ll_append(l: LinkedList, item: int) -> Cell:
 
         l.sentinelle.suiv=new_cell
         l.sentinelle.pred=new_cell
+        l.size+=1
+#        print(l.sentinelle.pred)
+#        print(l.sentinelle.suiv)
 
     else :
 
@@ -98,6 +109,7 @@ def ll_append(l: LinkedList, item: int) -> Cell:
         l.sentinelle.pred = new_cell # la sentinelle prends comme val pred la nouvelle cell
 
         tmp.suiv = new_cell # la fin de la list n'est plus la fin de la liste et prends new_cell comme la nouvelle fin
+        l.size+=1
 
     return new_cell
 """
@@ -130,7 +142,17 @@ def ll_len(l: LinkedList) -> int:
 
 
 def ll_str(l: LinkedList) -> str:
+    #raise NotImplementedError("LinkedList ll_str function not yet implemented")
+
+    if ll_is_empty(l):
+        raise IndexError
+    
+    tmp_cell : Cell = ll_head(l)
+
+    for i in range(l.size):
+        print(tmp_cell.item)
     raise NotImplementedError("LinkedList ll_str function not yet implemented")
+
 
 
 def ll_lookup(l: LinkedList, item: int) -> Cell:
@@ -155,3 +177,11 @@ def ll_remove(l: LinkedList, cell: Cell) -> int:
 
 def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
     raise NotImplementedError("LinkedList ll_extend function not yet implemented")
+
+if __name__=='__main__':
+
+    a : LinkedList = ll_new([1,2,3,4])
+
+
+
+    pass
