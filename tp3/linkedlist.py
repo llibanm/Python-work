@@ -99,6 +99,7 @@ def ll_append(l: LinkedList, item: int) -> Cell:
 
         tmp.suiv = new_cell # la fin de la list n'est plus la fin de la liste et prends new_cell comme la nouvelle fin
 
+    return new_cell
 
 
 
