@@ -134,7 +134,25 @@ def ll_iter(l: LinkedList, reverse: bool=False) -> Iterator[Cell]:
             while current.next is not None:
                 yield current
     '''
-    raise NotImplementedError("LinkedList ll_iter_cells function not yet implemented")
+    #raise NotImplementedError("LinkedList ll_iter_cells function not yet implemented")
+
+    current : Cell = Cell(
+        item=0,
+        pred=None,
+        suiv=None
+    )
+
+    if not ll_is_empty(l):
+        current = ll_head(l)
+
+    if reverse:
+        while current.pred is not None:
+            yield current
+    else:
+        while current.suiv is not None:
+            yield current        
+
+
 
 
 def ll_len(l: LinkedList) -> int:
