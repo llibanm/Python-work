@@ -1,0 +1,6 @@
+# contenu du fichier tp0/data/numbers.txt
+1
+2
+23
+45221
+13
