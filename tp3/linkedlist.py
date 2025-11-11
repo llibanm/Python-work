@@ -118,10 +118,15 @@ def ll_append(l: LinkedList, item: int) -> Cell:
     
 """
 
+def ll_next(c:Cell) -> Cell:
+    if c.suiv != None:
+        return c.suiv
+    else : raise IndexError
 
-
-
-
+def ll_prev(c:Cell) -> Cell:
+    if c.pred != None:
+        return c.pred
+    else : raise IndexError
 
 def ll_iter(l: LinkedList, reverse: bool=False) -> Iterator[Cell]:
     '''
@@ -143,14 +148,24 @@ def ll_iter(l: LinkedList, reverse: bool=False) -> Iterator[Cell]:
     )
 
     if not ll_is_empty(l):
-        current = ll_head(l)
+        
+        if reverse:
+            
+            current = ll_tail(l)
 
-    if reverse:
-        while current.pred is not None:
-            yield current
-    else:
-        while current.suiv is not None:
-            yield current        
+            while current != l.sentinelle:
+                yield current
+                current = ll_prev(current)
+
+
+        else :
+
+            current = ll_tail(l)
+
+            while current != l.sentinelle:
+                yield current
+                current = ll_next(current)        
+
 
 
 

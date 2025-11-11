@@ -90,7 +90,17 @@ def al_set(tab: ArrayList, i: int, item: int) -> ArrayList:
 
 
 def al_lookup(tab: ArrayList, item: int) -> int | None:
-    raise NotImplementedError("ArrayList al_lookup function not implemented yet")
+    #raise NotImplementedError("ArrayList al_lookup function not implemented yet")
+
+    if al_is_empty(tab): 
+        return None
+    
+    else :
+        for i in range(tab.size):
+            if tab.tab[i] == item:
+                return i
+    
+    return None
 
 
 def al_remove(tab: ArrayList, i: int) -> ArrayList:
@@ -115,6 +125,7 @@ def al_extend(tab1: ArrayList, tab2: ArrayList) -> ArrayList:
 if __name__=="__main__":
     a : ArrayList = al_new(10,[1,2,3,4])
     print(a)
+    print(al_lookup(a,1))
    #print(al_get(a))
 
     pass

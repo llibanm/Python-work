@@ -130,11 +130,12 @@ class TestSet:
 
 # Test al_lookup
 class TestLookup:
-
+    
     def test_al_lookup(self, input_list, dsize):
         l = input_list  # alias
         al = al_new(len(l) + dsize, l)
         assert all(al_lookup(al, e) == l.index(e) for e in l)   # index rather than i because of duplicates
+
 
     def test_al_lookup_empty(self, empty_list, dsize):
         l = empty_list  # alias
