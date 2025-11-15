@@ -160,7 +160,7 @@ def ll_iter(l: LinkedList, reverse: bool=False) -> Iterator[Cell]:
 
         else :
 
-            current = ll_tail(l)
+            current = ll_head(l)
 
             while current != l.sentinelle:
                 yield current
@@ -214,6 +214,9 @@ def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
 if __name__=='__main__':
 
     a : LinkedList = ll_new([1,2,3,4])
+
+    for c in ll_iter(a,True):
+        print(c)
 
 
 
