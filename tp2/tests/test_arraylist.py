@@ -200,7 +200,7 @@ class TestRemove:
 
 # Test al_insert
 class TestInsert:
-
+    
     def test_al_insert(self, input_list, dsize):
         import random
 
@@ -242,7 +242,7 @@ class TestInsert:
         assert all(al_get(al, i) == 42 for i in range(dsize + 1))
         assert al_len(al) == dsize + 1
         assert not al_is_empty(al)
-
+    
     def test_al_insert_fails_out_of_bounds(self, input_list_with_null, dsize):
         l = input_list_with_null  # alias
         size = 0 if l is None else len(l)

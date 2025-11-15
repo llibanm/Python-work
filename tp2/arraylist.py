@@ -42,7 +42,7 @@ def al_len(tab: ArrayList) -> int:
 
 
 def al_is_empty(tab: ArrayList) -> bool:
-    return tab.size<=0
+    return tab.size<=0 and tab.tab==[]
 
 
 def al_str(tab: ArrayList) -> str:
@@ -86,7 +86,14 @@ def al_get(tab: ArrayList, i: int) -> int:
 
 
 def al_set(tab: ArrayList, i: int, item: int) -> ArrayList:
-    raise NotImplementedError("ArrayList al_set function not implemented yet")
+    #raise NotImplementedError("ArrayList al_set function not implemented yet")
+    if i > tab.fin or i < 0:
+        raise IndexError
+    tab.tab[i] = item
+    return tab
+
+
+
 
 
 def al_lookup(tab: ArrayList, item: int) -> int | None:
@@ -104,11 +111,31 @@ def al_lookup(tab: ArrayList, item: int) -> int | None:
 
 
 def al_remove(tab: ArrayList, i: int) -> ArrayList:
-    raise NotImplementedError("ArrayList al_remove function not implemented yet")
+    #raise NotImplementedError("ArrayList al_remove function not implemented yet")
+    if i < 0 or i > tab.size:
+        raise IndexError
+    tab.tab.pop(i)
+    tab.size -=1
+    return tab
 
 
 def al_insert(tab: ArrayList, i: int, item: int) -> ArrayList:
-    raise NotImplementedError("ArrayList al_insert function not implemented yet")
+    #raise NotImplementedError("ArrayList al_insert function not implemented yet")
+
+    if i < 0 or i > tab.size:  # i peut être égal à tab.size (insertion en fin)
+        raise IndexError
+    
+    if tab.size >= tab.max_size:
+        raise OverflowError("Array Overflow")
+    
+    
+    tab.tab.insert(i,item) # insert just before the index ( if i=4, then it'll insert in index=3)
+    tab.size+=1
+    tab.fin+=1
+    
+    return tab
+
+        
 
 
 def al_prepend(tab: ArrayList, item: int) -> ArrayList:
@@ -125,7 +152,11 @@ def al_extend(tab1: ArrayList, tab2: ArrayList) -> ArrayList:
 if __name__=="__main__":
     a : ArrayList = al_new(10,[1,2,3,4])
     print(a)
-    print(al_lookup(a,1))
+    a = al_insert(a,4,99)
+    print(a)
+    #print(al_lookup(a,1))
+    #print(al_remove(a,0))
+    #print(a)
    #print(al_get(a))
 
     pass
