@@ -232,11 +232,72 @@ def ll_cell_at(l: LinkedList, i: int) -> Cell:
 
 
 def ll_prepend(l: LinkedList, item: int) -> Cell:
-    raise NotImplementedError("LinkedList ll_prepend function not yet implemented")
+    #raise NotImplementedError("LinkedList ll_prepend function not yet implemented")
+
+    new_head : Cell
+
+    if ll_is_empty(l):
+       new_head = Cell (
+           item=item,
+           pred=l.sentinelle,
+           suiv=l.sentinelle)
+       
+       l.sentinelle.suiv=new_head
+       l.sentinelle.pred=new_head
+
+       l.size+=1
+
+       return new_head
+
+
+
+    new_head  = Cell(
+        item= item,
+        pred=l.sentinelle,
+        suiv=ll_head(l))
+
+    former_head = ll_head(l)
+    former_head.pred = new_head
+
+    l.sentinelle.suiv = new_head     
+
+    l.size+=1
+
+    return new_head
+    
 
 
 def ll_insert(l: LinkedList, item: int, next_to: Cell) -> Cell:
-    raise NotImplementedError("LinkedList ll_insert function not yet implemented")
+    #raise NotImplementedError("LinkedList ll_insert function not yet implemented")
+
+    new_cell : Cell
+
+    if ll_is_empty(l):
+        ll_append(l,item)
+    
+    next_to_suiv : Cell
+
+    for i in ll_iter(l):
+        if i == next_to:
+            next_to_suiv = ll_next(next_to)
+            
+            new_cell = Cell(
+                item=item,
+                pred=next_to,
+                suiv=next_to_suiv
+            )
+
+            next_to.suiv = new_cell
+            next_to_suiv.pred = new_cell
+            l.size+=1
+
+            return new_cell
+
+
+    raise IndexError('Cell not found')
+
+            
+                   
 
 
 def ll_remove(l: LinkedList, cell: Cell) -> int:
@@ -249,8 +310,16 @@ def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
 if __name__=='__main__':
 
     a : LinkedList = ll_new([1,2,3,4,5,6,7,8])
+    print(ll_str(a))
 
-    print(ll_cell_at(a,2))
+    #ll_prepend(a,0)
+    #ll_prepend(a,-1)
+
+    next_to_variable :Cell = ll_next(ll_next(ll_head(a))) #3
+
+    ll_insert(a,-1,next_to_variable)
+
+    print(ll_str(a))
 
 
 
