@@ -177,15 +177,27 @@ def ll_len(l: LinkedList) -> int:
 def ll_str(l: LinkedList) -> str:
     #raise NotImplementedError("LinkedList ll_str function not yet implemented")
 
+    res : str =""
+    res+="["
+
     if ll_is_empty(l):
-        raise IndexError
-    
-    tmp_cell : Cell = ll_head(l)
+        return '[]'
 
-    for i in range(l.size):
-        print(tmp_cell.item)
-    raise NotImplementedError("LinkedList ll_str function not yet implemented")
+    size = l.size
+    tmp = ll_head(l)
 
+    for i in range(size):
+        res += str(tmp.item)
+        
+        if i != size-1:
+            res+="," + " "
+            tmp = ll_next(tmp)
+
+    res+="]"
+
+    return res    
+
+ 
 
 
 def ll_lookup(l: LinkedList, item: int) -> Cell:
@@ -213,10 +225,9 @@ def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
 
 if __name__=='__main__':
 
-    a : LinkedList = ll_new([1,2,3,4])
+    a : LinkedList = ll_new([1,2,3,4,5,6,7,8])
 
-    for c in ll_iter(a,True):
-        print(c)
+    print(ll_str(a))
 
 
 
