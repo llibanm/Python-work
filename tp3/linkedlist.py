@@ -200,12 +200,35 @@ def ll_str(l: LinkedList) -> str:
  
 
 
-def ll_lookup(l: LinkedList, item: int) -> Cell:
-    raise NotImplementedError("LinkedList ll_lookup function not yet implemented")
+def ll_lookup(l: LinkedList, item: int) -> Cell | None:
+    #raise NotImplementedError("LinkedList ll_lookup function not yet implemented")
+
+    if ll_is_empty(l):
+        return None
+    
+    for i in ll_iter(l):
+        if i.item==item:
+            return i
+
+    return None    
 
 
 def ll_cell_at(l: LinkedList, i: int) -> Cell:
-    raise NotImplementedError("LinkedList ll_cell_at function not yet implemented")
+    #raise NotImplementedError("LinkedList ll_cell_at function not yet implemented")
+
+    if i < 0 or i > ll_len(l):
+        raise IndexError("index out of range")
+    
+    tmp = ll_head(l)
+
+    for c in range(ll_len(l)):
+        if c == i:
+            return tmp
+        tmp = ll_next(tmp)
+        
+    raise IndexError("index out of range")  
+        
+        
 
 
 def ll_prepend(l: LinkedList, item: int) -> Cell:
@@ -227,7 +250,7 @@ if __name__=='__main__':
 
     a : LinkedList = ll_new([1,2,3,4,5,6,7,8])
 
-    print(ll_str(a))
+    print(ll_cell_at(a,2))
 
 
 

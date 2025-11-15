@@ -173,7 +173,7 @@ class TestLookupAndCellAt:
     def test_lookup_fails(self, input_list_with_null, wrong_value):
         ll = ll_new(input_list_with_null)
         assert ll_lookup(ll, wrong_value) is None
-
+    
     def test_cell_at(self, input_list):
         ll = ll_new(input_list)
         assert all(ll_cell_at(ll, i).item == e for i, e in enumerate(input_list))
