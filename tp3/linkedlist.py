@@ -301,7 +301,38 @@ def ll_insert(l: LinkedList, item: int, next_to: Cell) -> Cell:
 
 
 def ll_remove(l: LinkedList, cell: Cell) -> int:
-    raise NotImplementedError("LinkedList ll_remove function not yet implemented")
+    #raise NotImplementedError("LinkedList ll_remove function not yet implemented")
+
+    if ll_is_empty(l):
+        raise IndexError("empty linkedlist")
+    
+    found = False
+
+    for i in ll_iter(l):
+        if i == cell:
+            found=True
+            break
+
+    if not found:
+        raise IndexError("Value not found") 
+
+    prev_cell = ll_prev(cell)
+    next_cell = ll_next(cell)
+
+
+    prev_cell.suiv = next_cell
+    next_cell.pred = prev_cell
+
+    cell.suiv = None
+    cell.pred = None
+    
+
+    l.size-=1
+
+    return cell.item
+    
+        
+    
 
 
 def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
@@ -310,7 +341,9 @@ def ll_extend(l1: LinkedList, l2: LinkedList) -> None:
 if __name__=='__main__':
 
     a : LinkedList = ll_new([1,2,3,4,5,6,7,8])
-    print(ll_str(a))
+    b : LinkedList = ll_new([])
+
+    print(ll_str(a) + " |",a.size)
 
     #ll_prepend(a,0)
     #ll_prepend(a,-1)
@@ -319,7 +352,17 @@ if __name__=='__main__':
 
     ll_insert(a,-1,next_to_variable)
 
-    print(ll_str(a))
+    print(ll_str(a) + " |",a.size)
+
+    to_del = ll_next(next_to_variable)
+
+    print(ll_remove(a,to_del)) # deleting -1
+
+    print(ll_str(a) + " |",a.size)
+
+    #print(ll_remove(a,to_del))
+    print(ll_remove(b,to_del))
+
 
 
 
