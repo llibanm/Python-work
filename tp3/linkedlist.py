@@ -39,9 +39,13 @@ def ll_new(initial_l: list[int] | None = None) -> LinkedList:
             suiv=None,
         ),
 
+
         size=0,
 
     )
+
+    new.sentinelle.pred=new.sentinelle
+    new.sentinelle.suiv=new.sentinelle
 
     if initial_l !=None:
 
@@ -56,7 +60,7 @@ def ll_new(initial_l: list[int] | None = None) -> LinkedList:
 
 def ll_is_empty(l: LinkedList) -> bool:
     #raise NotImplementedError("LinkedList ll_is_empty function not yet implemented")
-    return l.sentinelle.suiv==None and l.sentinelle.pred==None and l.size==0
+    return l.sentinelle.suiv==l.sentinelle and l.sentinelle.pred==l.sentinelle and l.size==0
 
 
 
