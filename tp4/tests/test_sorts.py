@@ -1,4 +1,6 @@
 import pytest
+
+
 from tp4.stupidsort import stupidsort
 from tp4.insertionsort import insertionsort
 from tp4.quicksort import quicksort, quicksort_alt
