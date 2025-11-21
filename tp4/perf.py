@@ -1,19 +1,27 @@
 import matplotlib.pyplot as plt
 import matplotlib
 import sys
-
+import random
 
 from timeit import timeit
 from collections.abc import Callable, Iterator, Iterable
 import functools 
 
 def input_arrays(n: int=1_000, N: int=1_000, repl: bool=True) -> Iterator[list[int]]:
-    # TODO: à implémenter
+    
+    N_list = list(range(N))
 
-    for i in range (N):
-        
-        new_list : list[int] = [j for j in range(n)]
-        yield new_list
+    new_list : list[int]
+
+    if repl:
+            for i in range (n):
+
+                yield list(random.choices(N_list,k=i))
+            
+    else :
+        for i in range(n):
+             yield list(random.sample(N_list,i))
+
 
 
 
@@ -45,10 +53,11 @@ if __name__=="__main__":
 
      test = list(input_arrays())
 
-     result= timeit_batch(sum, test, cumul=4)
-     
-     print(result)
+     result: list[float]= timeit_batch(sum, test, cumul=4)
+     result_2 : list[float]=timeit_batch(sum_reduce, test, cumul=4)
+  
      plot_array(array=result, title="sum", log=False)
+     plot_array(array=result_2, title="sum_reduce", log=False)
 
      #plt.savefig(sys.stdout.buffer)
      #sys.stdout.flush()
