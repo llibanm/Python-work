@@ -30,11 +30,17 @@ class Node:
 
 
 def bt_is_empty(bt: BinaryTree) -> bool:
-    raise NotImplementedError("bt_is_empty function not implemented yet")
+    #raise NotImplementedError("bt_is_empty function not implemented yet")
+    return bt.root == None
 
 
 def bt_root(bt: BinaryTree) -> Node:
-    raise NotImplementedError("bt_root function not implemented yet")
+    #raise NotImplementedError("bt_root function not implemented yet")
+
+    if bt.root == None:
+        raise ValueError("Error : Root is empty")
+    
+    return bt.root
 
 
 def bt_iter_dfs(n: Node) -> Iterator[Node]:
