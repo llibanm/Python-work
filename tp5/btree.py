@@ -140,8 +140,46 @@ def bt_size(bt: BinaryTree) -> int:
     return count    
 
 
+def bt_left(root:Node) -> Node:
+   if root is None or root.left is None:
+       raise ValueError
+   return root.left
+
+def bt_right(root:Node) -> Node:
+   if root is None or root.right is None:
+       raise ValueError
+   return root.right   
+
+
+def node_str_rec(rt : Node|None) -> str:
+
+    if rt is None :
+        return ""
+    
+    if rt.right is None and rt.left is None:
+        return str(rt.key)
+    
+    if rt.right is None and rt.left is not None:
+        return str(rt.key)  + " " + "("   + node_str_rec(rt.left)  + ")" + " " + "()" 
+    
+    if rt.right is not None and rt.left is  None:
+        return str(rt.key)  + " " + "()" + " " + "("  + node_str_rec(rt.right)  + ")" 
+    
+    else :
+        return str(rt.key)  + " " + "("  + node_str_rec(rt.left) + ")" + " " + "(" + node_str_rec(rt.right) + ")"  
+
+
+
 def bt_str(bt: BinaryTree) -> str:
-    raise NotImplementedError("bt_str function not implemented yet")
+    #raise NotImplementedError("bt_str function not implemented yet")
+
+    if bt.root is None :
+        ""
+
+    return node_str_rec(bt.root)    
+
+   
+    
 
 
 def bt_new(nodes: list[int | None] | None = None) -> BinaryTree:
@@ -170,9 +208,10 @@ def lol()->Iterator[int]:
 
 if __name__ == '__main__':
     a = BinaryTree(Node(0, Node(1, Node(3), Node(4)), Node(2, Node(5), Node(6))))
-    b = BinaryTree( Node(0,Node(1),Node(2,Node(3,Node(4),Node(5)))))
+    b = BinaryTree( Node ( 0 , Node(1) , Node ( 2 , Node ( 3 , Node(4)),Node(5))))
 
-    print(bt_size(a))
-    print(bt_size(b))
+    print(bt_str(a))
+    print(bt_str(b))
+    
 
     pass    
