@@ -44,11 +44,52 @@ def bt_root(bt: BinaryTree) -> Node:
 
 
 def bt_iter_dfs(n: Node) -> Iterator[Node]:
-    raise NotImplementedError("n_iter_dfs function not implemented yet")
+    #raise NotImplementedError("n_iter_dfs function not implemented yet")
 
+    if n == None:
+        return
+
+    if n.left == None and n.right == None:
+        yield n
+
+    elif n.right == None and n.left != None:
+        yield from bt_iter_dfs(n.left)    
+        #yield n.left
+        yield n
+
+    elif n.right != None and n.left == None:
+        yield n
+        yield from bt_iter_dfs(n.right)
+        #yield n.right
+
+    elif n.right != None and n.left != None:
+        yield from bt_iter_dfs(n.left)          
+        #yield n.left
+        yield n
+        #yield n.right
+        yield from bt_iter_dfs(n.right)
 
 def bt_iter_bfs(n: Node) -> Iterator[Node]:
-    raise NotImplementedError("n_iter_bfs function not implemented yet")
+    #raise NotImplementedError("n_iter_bfs function not implemented yet")
+
+    if n == None:
+        return
+    
+    pile = [n]
+
+    while pile :
+
+        tmp = pile.pop(0)
+
+        yield tmp 
+
+        if tmp.left is not None:
+            pile.append(tmp.left)
+        if tmp.right is not None:
+            pile.append(tmp.right)    
+
+    
+
 
 
 def bt_height(bt: BinaryTree) -> int:
@@ -83,5 +124,16 @@ def bt_prettystr(bt: BinaryTree) -> str:
     raise NotImplementedError("bt_prettystr function not implemented yet")
 
 
+def lol()->Iterator[int]:
+    yield 3
+    yield 4
+
 if __name__ == '__main__':
     a = BinaryTree(Node(0, Node(1, Node(3), Node(4)), Node(2, Node(5), Node(6))))
+
+    c = bt_iter_bfs(bt_root(a))
+
+    for i in c :
+        print(i.key)
+
+    pass    
