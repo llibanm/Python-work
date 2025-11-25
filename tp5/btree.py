@@ -88,16 +88,56 @@ def bt_iter_bfs(n: Node) -> Iterator[Node]:
         if tmp.right is not None:
             pile.append(tmp.right)    
 
+def max(a:int,b:int):
+    if a >= b:
+        return a
+    return b    
+
+def node_height(node : Node|None) -> int :
+
+    if node is None:
+        return -1
+    
+    left_side = node_height(node.left)
+    right_side = node_height(node.right)
+    return 1 + max(left_side,right_side)
+
+def bt_height(bt: BinaryTree) -> int:
+    #raise NotImplementedError("bt_height function not implemented yet")
+    
+    if bt.root == None:
+        return -1
+    
+    root = bt.root
+
+    return node_height(root)
+
+    
+    
+    
     
 
 
-
-def bt_height(bt: BinaryTree) -> int:
-    raise NotImplementedError("bt_height function not implemented yet")
-
-
 def bt_size(bt: BinaryTree) -> int:
-    raise NotImplementedError("bt_size function not implemented yet")
+    #raise NotImplementedError("bt_size function not implemented yet")
+
+    if bt.root == None:
+        return 0
+    
+    liste = [bt.root]
+    count = 0
+
+    while liste:
+
+        tmp = liste.pop()
+        count+=1
+
+        if tmp.left is not None:
+            liste.append(tmp.left)
+        if tmp.right is not None:
+            liste.append(tmp.right)     
+
+    return count    
 
 
 def bt_str(bt: BinaryTree) -> str:
@@ -130,10 +170,9 @@ def lol()->Iterator[int]:
 
 if __name__ == '__main__':
     a = BinaryTree(Node(0, Node(1, Node(3), Node(4)), Node(2, Node(5), Node(6))))
+    b = BinaryTree( Node(0,Node(1),Node(2,Node(3,Node(4),Node(5)))))
 
-    c = bt_iter_bfs(bt_root(a))
-
-    for i in c :
-        print(i.key)
+    print(bt_size(a))
+    print(bt_size(b))
 
     pass    
