@@ -179,11 +179,35 @@ def bt_str(bt: BinaryTree) -> str:
     return node_str_rec(bt.root)    
 
    
+
+def bt_new(nodes: list[int | None] | None = None) -> BinaryTree:
+   # raise NotImplementedError("bt_new function not implemented yet")
+        
+
+    if nodes is None or len(nodes) == 0 or all(v is None for v in nodes):
+        return BinaryTree(None)
+    
+    def bt_new_aux(index:int) -> Node | None:
+
+        if index > len(nodes)-1 or nodes[index] is None:
+            return None
+        
+        value : int = nodes[index]  # type: ignore (why BECAUSE THE SYSTEM DOSENT RECOGNIZE IT AS BEING SURE IT ISNT INT)
+
+        node = Node(
+            key=value,
+            left= bt_new_aux(2 * index + 1),
+            right= bt_new_aux(2  * index +2)
+        )
+
+        return node
+
+    root = bt_new_aux(0)
+    return BinaryTree(root)            
+   
     
 
 
-def bt_new(nodes: list[int | None] | None = None) -> BinaryTree:
-    raise NotImplementedError("bt_new function not implemented yet")
 
 
 def bt_is_bst(bt: BinaryTree) -> bool:
@@ -208,10 +232,17 @@ def lol()->Iterator[int]:
 
 if __name__ == '__main__':
     a = BinaryTree(Node(0, Node(1, Node(3), Node(4)), Node(2, Node(5), Node(6))))
-    b = BinaryTree( Node ( 0 , Node(1) , Node ( 2 , Node ( 3 , Node(4)),Node(5))))
+    #b = BinaryTree( Node ( 0 , Node(1) , Node ( 2 , Node ( 3 , Node(4)),Node(5))))
 
-    print(bt_str(a))
-    print(bt_str(b))
+    #print(bt_str(a))
+   # print(bt_str(b))
     
+    #test = [5] * 6
+
+    #print(test)
+
+    c = bt_new([1,2,None])
+
+    print(bt_str(c))
 
     pass    
