@@ -12,16 +12,65 @@ Operators = {
 }
 
 
+def check_operator(op:int) -> bool:
+
+    for key,val in Operators.items():
+        if op == val:
+            return True
+        
+    return False    
+
+
+def eval_ast_aux_rec(ast:Node|None) ->float:
+
+    if ast == None :
+        return 0   
+    
+
+    
+    if ast.right == None and ast.left == None:
+     
+        return float(ast.key)
+
+    res : float = 0
+
+    match ast.key:
+        
+        case 0: 
+           res = eval_ast_aux_rec(ast.left) + eval_ast_aux_rec(ast.right)
+        
+        case 1:
+            res =  eval_ast_aux_rec(ast.left) - eval_ast_aux_rec(ast.right)
+        
+        case 2:
+            res =  eval_ast_aux_rec(ast.left) * eval_ast_aux_rec(ast.right)
+
+        case 3:
+            print('here')
+            print('key :',ast.key)
+            print('right :',ast.right)
+            print('left :', ast.left)
+            if eval_ast_aux_rec(ast.right) == 0:
+                raise ZeroDivisionError()
+            res =  eval_ast_aux_rec(ast.left) / eval_ast_aux_rec(ast.right)    
+
+        case _:
+            raise ValueError("error: value unknown")    
+    
+
+    return res
+
 def eval_ast(ast: AST) -> float:
 
-    if ast == None or ast.root == None:
+    if ast == None : # 1er cas, l'arbre est vide
         raise ValueError("AST empy") 
 
-    root :  Node = ast.root
+    root  = ast.root
 
-    pass
+    return eval_ast_aux_rec(root)
 
 def create_ast_example() -> AST:
+    
     """
     Crée l'AST de l'expression: (4 - 2) + (3 * 5)
     En notation préfixée: (+ (- 4 2) (* 3 5))
@@ -30,7 +79,7 @@ def create_ast_example() -> AST:
            +
           / \
          -   *
-        / \ / \
+        / | / \
        4  2 3  5
     
     Returns:
@@ -68,5 +117,11 @@ if __name__=='__main__':
     
 
     a = create_ast_example()
+    print(eval_ast(a))
+    """    print(Operators['+'])
+    print(Operators['-'])
+    print(Operators['*'])
+    print(Operators['/'])"""
+
 
     pass
