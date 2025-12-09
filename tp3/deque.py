@@ -11,6 +11,7 @@ from tp3.linkedlist import (LinkedList,
                         ll_remove)
 
 
+
 @dataclass
 class Deque:
     ll: LinkedList
@@ -58,11 +59,35 @@ def d_pop_front(d: Deque) -> Deque:
     if ll_is_empty(d.ll):
         raise IndexError('Unable to pop the front of an empty deque')
     # TODO: complete the missing part
+
+    a = ll_remove(d.ll,ll_head(d.ll))
+
     return d
+
 
 
 def d_pop_rear(d: Deque) -> Deque:
     if ll_is_empty(d.ll):
         raise IndexError('Unable to pop the rear of an empty deque')
     # TODO: complete the missing part
+
+    a = ll_remove(d.ll,ll_tail(d.ll))
+
     return d
+if __name__=='__main__':
+
+    a : LinkedList = ll_new([1,2,3,4,5,6,7,8])
+
+    deq : Deque = Deque(a)
+
+    print(ll_str(deq.ll) + " |",a.size)
+
+    deq_mod = d_pop_front(deq)
+
+    print(ll_str(deq_mod.ll) + " |",a.size)
+
+    deq_mod2 = d_pop_rear(deq_mod)
+
+    print(ll_str(deq_mod.ll) + " |",a.size)
+
+    pass

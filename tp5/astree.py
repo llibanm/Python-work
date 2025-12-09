@@ -46,10 +46,8 @@ def eval_ast_aux_rec(ast:Node|None) ->float:
             res =  eval_ast_aux_rec(ast.left) * eval_ast_aux_rec(ast.right)
 
         case 3:
-            print('here')
-            print('key :',ast.key)
-            print('right :',ast.right)
-            print('left :', ast.left)
+
+
             if eval_ast_aux_rec(ast.right) == 0:
                 raise ZeroDivisionError()
             res =  eval_ast_aux_rec(ast.left) / eval_ast_aux_rec(ast.right)    
@@ -68,6 +66,25 @@ def eval_ast(ast: AST) -> float:
     root  = ast.root
 
     return eval_ast_aux_rec(root)
+
+def exp_to_ast(tokens: list[str]) -> AST:
+
+    new_ast : AST
+
+    if tokens == []:
+        return AST(None)
+    
+    if len(tokens) % 2 != 0:
+        return AST(None)
+
+    def exp_to_ast_aux(tokens: list[str]) -> Node:
+        
+        first_element = tokens.pop()
+
+        if not Operators[first_element]:
+            
+
+
 
 def create_ast_example() -> AST:
     
